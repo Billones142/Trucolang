@@ -27,7 +27,7 @@ Trucolang es un compilador que traduce código escrito en un lenguaje inspirado 
 
 Supón que tienes el siguiente archivo `holaMundo.truco`:
 ```
-retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero flor
+retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero flor
 ```
 
 Compílalo con:
@@ -52,6 +52,23 @@ El resultado estará en `output.brainfuck`.
 
 - Los comentarios o palabras no reconocidas serán ignorados.
 - El compilador verifica que los bucles (`truco` y `vale cuatro`) estén balanceados.
+
+## Sintaxis de repetición
+
+Puedes escribir varias veces un mismo comando usando la sintaxis:
+
+```
+comando(n)
+```
+Donde `comando` es cualquier instrucción válida de Trucolang y `n` es el número de repeticiones. Por ejemplo:
+
+```
+quiero(5) envido(3) truco venite(2)
+```
+Esto equivale a escribir:
+```
+quiero quiero quiero quiero quiero envido envido envido truco venite venite
+```
 
 ## Licencia
 

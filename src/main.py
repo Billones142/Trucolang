@@ -1,4 +1,5 @@
 import sys
+import re
 
 TRUCOLANG_TO_BRAINFUCK = {
     "quiero": "+",           # Incrementar memoria
@@ -20,20 +21,36 @@ class SyntaxError(Exception):
     pass
 
 def lexer(source_code: str) -> list[str]:
-    """Análisis léxico: convierte texto en tokens válidos"""
-    words = source_code.split()
+    """
+    Análisis léxico robusto: reconoce comandos válidos (de una o dos palabras, con o sin repetición),
+    sin depender de los espacios. Lanza error si encuentra un token inválido.
+    """
+    # Lista de comandos válidos, ordenados por longitud descendente para evitar ambigüedad
+    commands = sorted(VALID_COMMANDS, key=lambda x: -len(x))
+    # Construir patrón regex para todos los comandos, permitiendo (n) al final
+    pattern = r"|".join([re.escape(cmd) + r"(\(\d+\))?" for cmd in commands])
+    token_regex = re.compile(pattern)
     tokens: list[str] = []
-    i = 0
-    while i < len(words):
-        if i + 1 < len(words) and f"{words[i]} {words[i+1]}" in VALID_COMMANDS:
-            tokens.append(f"{words[i]} {words[i+1]}")
-            i += 2
-        elif words[i] in VALID_COMMANDS:
-            tokens.append(words[i])
-            i += 1
+    pos = 0
+    while pos < len(source_code):
+        match = token_regex.match(source_code, pos)
+        if match:
+            token_str = match.group(0)
+            # Verificar si es repetición
+            rep_match = re.match(r"^(.*)\((\d+)\)$", token_str)
+            if rep_match:
+                cmd = rep_match.group(1)
+                count = int(rep_match.group(2))
+                tokens.extend([cmd] * count)
+            else:
+                tokens.append(token_str)
+            pos = match.end()
+        elif source_code[pos].isspace():
+            pos += 1  # Ignorar espacios
         else:
-            raise SyntaxError(f"Token no reconocido '{words[i]}'.")
-            i += 1
+            # Encontró un token inválido
+            end = pos + 20 if pos + 20 < len(source_code) else len(source_code)
+            raise SyntaxError(f"Token no reconocido cerca de: '{source_code[pos:end]}'")
     return tokens
 
 def syntax_analyzer(tokens: list[str]) -> bool:
