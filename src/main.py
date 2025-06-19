@@ -72,12 +72,12 @@ def generate_brainfuck(tokens: list[str]) -> str:
     return ''.join(TRUCOLANG_TO_BRAINFUCK[token] for token in tokens)
 
 def compile_trucolang(source_code: str) -> str:
-    print("📘 Iniciando compilación...\n")
+    print("Iniciando compilación...\n")
     tokens = lexer(source_code)
-    print("✅ Tokens:", tokens)
+    print("Tokens:", tokens)
 
     syntax_analyzer(tokens)
-    print("✅ Análisis sintáctico correcto")
+    print("Análisis sintáctico correcto")
 
     brainfuck_code = generate_brainfuck(tokens)
 
@@ -85,11 +85,19 @@ def compile_trucolang(source_code: str) -> str:
 
 # Ejemplo de uso:
 if __name__ == "__main__":
-    with open(sys.argv[1], 'r') as file:
+    if len(sys.argv) < 2:
+        print("Uso: python main.py <archivo_entrada> [archivo_salida]")
+        sys.exit(1)
+    
+    input_file = sys.argv[1]
+    output_file = sys.argv[2] if len(sys.argv) > 2 else "output.bf"
+    
+    with open(input_file, 'r') as file:
         code = file.read()
     try:
         bf_code = compile_trucolang(code)
-        with open("output.brainfuck", "w") as outputFile:
+        with open(output_file, "w") as outputFile:
             outputFile.write(bf_code)
+        print(f"Código Brainfuck generado exitosamente en: {output_file}")
     except (LexicalError, SyntaxError) as e:
-        print("❌ Error durante la compilación:", e)
+        print("Error durante la compilación:", e)

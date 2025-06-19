@@ -21,7 +21,13 @@ Trucolang es un compilador que traduce código escrito en un lenguaje inspirado 
    ```bash
    python src/main.py holaMundo.truco
    ```
-   Esto generará un archivo `output.brainfuck` con el código Brainfuck resultante.
+   Esto generará un archivo `output.bf` con el código Brainfuck resultante.
+
+   **Opcionalmente, se puede especificar el nombre del archivo de salida:**
+   ```bash
+   python src/main.py holaMundo.truco hola_mundo_output.bf
+   ```
+   Esto generará el archivo `hola_mundo_output.bf` en lugar de `output.bf`.
 
 ## Ejemplo de uso
 
@@ -35,7 +41,14 @@ Compílalo con:
 python src/main.py holaMundo.truco
 ```
 
-El resultado estará en `output.brainfuck`.
+El resultado estará en `output.bf`.
+
+O si prefieres especificar el nombre del archivo de salida:
+```
+python src/main.py holaMundo.truco hola_mundo_output.bf
+```
+
+El resultado estará en `hola_mundo_output.bf`.
 
 ## Comandos de Trucolang
 
