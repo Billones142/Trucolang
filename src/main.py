@@ -32,8 +32,7 @@ def lexer(source_code: str) -> list[str]:
             tokens.append(words[i])
             i += 1
         else:
-            # Ignorar comentarios o texto inválido, o lanzar error si se desea
-            print(f"Advertencia: token no reconocido '{words[i]}'. Se ignora.")
+            raise SyntaxError(f"Token no reconocido '{words[i]}'.")
             i += 1
     return tokens
 
