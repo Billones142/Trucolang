@@ -19,10 +19,10 @@ class LexicalError(Exception):
 class SyntaxError(Exception):
     pass
 
-def lexer(source_code):
+def lexer(source_code: str) -> list[str]:
     """Análisis léxico: convierte texto en tokens válidos"""
     words = source_code.split()
-    tokens = []
+    tokens: list[str] = []
     i = 0
     while i < len(words):
         if i + 1 < len(words) and f"{words[i]} {words[i+1]}" in VALID_COMMANDS:
@@ -37,7 +37,7 @@ def lexer(source_code):
             i += 1
     return tokens
 
-def syntax_analyzer(tokens):
+def syntax_analyzer(tokens: list[str]) -> bool:
     """Análisis sintáctico: verifica que los bucles estén balanceados"""
     balance = 0
     for token in tokens:
@@ -51,11 +51,11 @@ def syntax_analyzer(tokens):
         raise SyntaxError("Error: cantidad desigual de 'truco' y 'vale cuatro'.")
     return True
 
-def generate_brainfuck(tokens):
+def generate_brainfuck(tokens: list[str]) -> str:
     """Traducción: convierte tokens a código Brainfuck"""
     return ''.join(TRUCOLANG_TO_BRAINFUCK[token] for token in tokens)
 
-def compile_trucolang(source_code):
+def compile_trucolang(source_code: str) -> str:
     print("📘 Iniciando compilación...\n")
     tokens = lexer(source_code)
     print("✅ Tokens:", tokens)
