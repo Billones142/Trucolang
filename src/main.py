@@ -1,14 +1,14 @@
 import sys
 
 TRUCOLANG_TO_BRAINFUCK = {
-    "retruco": "+",
-    "envido": "-",
-    "quiero": ">",
-    "no quiero": "<",
-    "truco": "[",
-    "vale cuatro": "]",
-    "flor": ".",
-    "muestra": ","
+    "quiero": "+",           # Incrementar memoria
+    "no quiero": "-",        # Decrementar memoria
+    "envido": ">",           # Mover puntero a la derecha
+    "falta envido": "<",     # Mover puntero a la izquierda
+    "truco": "[",            # Inicio de bucle
+    "vale cuatro": "]",      # Fin de bucle
+    "venite": ".",           # Imprimir caracter
+    "quedate": ","           # Leer caracter
 }
 
 VALID_COMMANDS = set(TRUCOLANG_TO_BRAINFUCK.keys())

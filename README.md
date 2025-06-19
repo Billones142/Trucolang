@@ -27,7 +27,7 @@ Trucolang es un compilador que traduce código escrito en un lenguaje inspirado 
 
 Supón que tienes el siguiente archivo `holaMundo.truco`:
 ```
-retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero flor
+retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco quiero flor
 ```
 
 Compílalo con:
@@ -39,16 +39,16 @@ El resultado estará en `output.brainfuck`.
 
 ## Comandos de Trucolang
 
-| Trucolang     | Brainfuck | Descripción                                                        |
-|---------------|-----------|--------------------------------------------------------------------|
-| retruco       | +         | Incrementa el valor en la celda de memoria actual                  |
-| envido        | -         | Decrementa el valor en la celda de memoria actual                  |
-| quiero        | >         | Mueve el puntero una celda a la derecha                            |
-| no quiero     | <         | Mueve el puntero una celda a la izquierda                          |
-| truco         | [         | Inicia un bucle; entra si el valor actual es distinto de cero      |
-| vale cuatro   | ]         | Cierra el bucle; vuelve si el valor actual es distinto de cero     |
-| flor          | .         | Imprime el carácter en la celda actual                             |
-| muestra       | ,         | Lee un carácter desde entrada y lo almacena en la celda actual     |
+| Brainfuck | Significado                        | Trucolang       |
+|-----------|------------------------------------|-----------------|
+| +         | Incrementar memoria                | quiero          |
+| -         | Decrementar memoria                | no quiero       |
+| >         | Mover puntero a la derecha         | envido          |
+| <         | Mover puntero a la izquierda       | falta envido    |
+| [         | Inicio de bucle                    | truco           |
+| ]         | Fin de bucle                       | vale cuatro     |
+| .         | Imprimir caracter                  | venite          |
+| ,         | Leer caracter                      | quedate         |
 
 - Los comentarios o palabras no reconocidas serán ignorados.
 - El compilador verifica que los bucles (`truco` y `vale cuatro`) estén balanceados.
