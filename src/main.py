@@ -1,3 +1,5 @@
+import sys
+
 TRUCOLANG_TO_BRAINFUCK = {
     "retruco": "+",
     "envido": "-",
@@ -69,8 +71,10 @@ def compile_trucolang(source_code):
 # Ejemplo de uso:
 if __name__ == "__main__":
     code = """
-    retruco retruco retruco quiero truco retruco no quiero vale cuatro flor
+    retruco retruco retruco quiero truco retruco no quiero vale cuatro flor retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco truco quiero retruco quiero retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco no quiero no quiero no quiero no quiero envido vale cuatro quiero quiero quiero retruco retruco flor quiero retruco flor retruco retruco retruco retruco retruco retruco retruco flor flor retruco retruco retruco flor no quiero no quiero retruco retruco flor quiero retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco retruco flor quiero flor retruco retruco retruco flor envido envido envido envido envido envido flor envido envido envido envido envido envido envido envido flor
     """
+    with open(sys.argv[1], 'r') as file:
+        code = file.read()
     try:
         bf_code = compile_trucolang(code)
     except (LexicalError, SyntaxError) as e:
